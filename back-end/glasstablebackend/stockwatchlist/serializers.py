@@ -9,5 +9,5 @@ class StockwatchlistSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'company',
                   'description',
-                  'price'
+                  'price',
                   'image')

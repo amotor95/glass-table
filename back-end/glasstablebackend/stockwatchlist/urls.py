@@ -1,6 +1,8 @@
-from django.conf.urls import path 
-from stockwatchlist import views 
+from django.urls import path 
+from django.contrib import admin
+from stockwatchlist.views import StockView 
  
 urlpatterns = [ 
-    path('api/<int:stock_id>', views.stock_info, name="stock_info")
+    path('admin/', admin.site.urls),
+    path('', StockView.as_view(), name="stockview")
 ]
