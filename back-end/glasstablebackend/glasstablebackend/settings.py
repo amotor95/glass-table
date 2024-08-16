@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'stockwatchlist',
     'corsheaders',
+
+    'accounts',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +80,7 @@ ROOT_URLCONF = 'glasstablebackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,6 +155,9 @@ USE_TZ = True
 #When you're ready to deploy make the static url stuff in urls.py or make the webserver do it
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
@@ -160,3 +167,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTH_USER_MODEL = 'accounts.UserAccount'
+
+#Glass-Table Email
+#email account: glasstableassistant@gmail.com
+#app password: zbou rdov sfqi doeq
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'glasstableassistant@gmail.com'
+EMAIL_HOST_PASSWORD = 'zbourdovsfqidoeq'
+EMAIL_USE_TLS = True
