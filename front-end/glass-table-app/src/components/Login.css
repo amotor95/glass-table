@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.functional-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a0ca3;
+    background-image: url("../assets/glass-table-stock-market-image.jpg");
+}
+
+
+.login-page {
+    height: 75%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f72585;
+    border-radius: 2vw;
+}
+
+.login-title {
+    font-size: 20px;
+    font-size: 2.5vw;
+    padding-bottom: 3vw;
+    color: #80ed99;
+}
+
+.inputs {
+    width: 25%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20%;
+    width: 50%;
+}
+
+.input-text {
+    color:#f72585;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 8px;
+    font-size: 1rem;
+    border-radius: 4px;
+    line-height: 10px;
+    border-color:blue;
+}
+
+.input-text::placeholder {
+    color:#f72585;
+}
+
+.input-text:focus {
+    border-color:#80ed99;
+    border-width: 2px;
+    outline: 0;
+    box-shadow: 5px 10px #80ed99;
+}
+
+.button-div {
+    padding-top: 3vw;
+}
+
+.input-text:not(:focus) + .login-title {
+    opacity: .5;
+}

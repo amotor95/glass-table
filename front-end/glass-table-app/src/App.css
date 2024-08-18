@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, body > #root, .main-page {
+    min-height: 100%;
+    height: 100%;
+}
+
+.topbar {
+    width: 100%;
+    height: 10%;
+    background-color: #4361ee;
+}
+
+.topbar-title {
+    text-align: center;
+    font-size: 30px;
+    font-size: 3.5vw;
+    color: #80ed99;
+}
+
+.main-box-div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 90%;
+}
+
+.functional-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a0ca3;
+    background-image: url("./assets/glass-table-stock-market-image.jpg")
+}

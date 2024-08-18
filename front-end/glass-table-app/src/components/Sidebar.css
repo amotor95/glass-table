@@ -1,0 +1,11 @@
+.login-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    width: 18%;
+    height: 100%;
+    background-color: #7209b7;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10%;
+}

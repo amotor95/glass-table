@@ -14,4 +14,4 @@ function Card({imgSrc, cardName, cardPrice}) {
     );
 }
 
-export default Card
+export default Card;
