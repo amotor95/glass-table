@@ -1,9 +1,10 @@
 import React from 'react';
 import './Login.css';
 import Button from './button';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import axios from 'axios';
 import { render } from '@testing-library/react';
+import { UserContext } from '../context/UserContext';
 
 function TestToken({token}) {
     axios.get('http://localhost:8000/login/test_token', {
@@ -24,6 +25,7 @@ export function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
+    const {LoggedIn, setLoggedIn} = useContext(UserContext);
 
     function getUser(event) {
         setUsername(event.target.value);
@@ -44,15 +46,13 @@ export function Login() {
                 password: password
             }
         ).then(response => {
+            console.log("Login successful!")
             setToken(response.data.token)
             console.log(response.data.user)
-        }).catch(error => {console.log(error)});
+            setLoggedIn(true)
+        }).catch(error => {console.log(error + ", Login Failed!")});
     
-        if(TestToken(token)) {
-            console.log("Logged in!");
-        } else {
-            console.log("Log in failed!");
-        };
+        
     
         return(console.log("OnLogin function concluded!"));
     

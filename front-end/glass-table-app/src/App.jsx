@@ -1,15 +1,17 @@
 import './App.css';
 import Card from './components/Card.jsx'
 import Login from './components/Login.jsx'
-import { LoggedInSidebar, LoggedOutSidebar } from './components/Sidebar.jsx';
-import React, { useState } from 'react';
+import { LoggedInSidebar, LoggedOutSidebar, SideBar } from './components/Sidebar.jsx';
+import React, { useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import Button from './components/button.jsx';
+import { UserContext } from './context/UserContext.jsx';
+import { FuncContext } from './context/FuncContext.jsx';
+import FuncBox from './components/FuncBox.jsx';
 
-class App extends React.Component {
-
-
-  render() {
+function App() {
+    const [LoggedIn, setLoggedIn] = useState(false)
+    const [CurrentScreen, setCurrentScreen] = useState("Home")
     return (
       <div className="main-page">
 
@@ -19,19 +21,22 @@ class App extends React.Component {
 
         <div className= "main-box-div">
 
-          <div className="login-sidebar">
-            <LoggedOutSidebar></LoggedOutSidebar>
-          </div>
-
-          <div className="functional-box">
-            <Login></Login>
-          </div>
+          
+          <UserContext.Provider value={{LoggedIn, setLoggedIn}}>
+          <FuncContext.Provider value={{CurrentScreen, setCurrentScreen}}>
+            <div className="login-sidebar">
+              <SideBar></SideBar>
+            </div>
+              <div className="functional-box">
+                <FuncBox></FuncBox>
+              </div>
+          </FuncContext.Provider>
+          </UserContext.Provider>
 
         </div>
 
       </div>
     )
-  }
 
 }
 
