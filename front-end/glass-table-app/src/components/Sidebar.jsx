@@ -27,6 +27,7 @@ export function LoggedInSidebar() {
     }
     return(
         <div className="login-sidebar">
+            <div>Welcome user</div>
             <Button className= "sidebar-button" onClick={()=>LogOut()} text="Logout"></Button>
         </div>
     );
