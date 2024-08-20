@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from accounts import views
+from watchlist import views
+from stock import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,5 @@ urlpatterns = [
     path('signup', views.signup),
     path('logout', views.logout),
     path('test_token', views.test_token),
+    path('get_watchlists', views.get_watchlists)
 ]
