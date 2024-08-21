@@ -8,4 +8,7 @@ import { FuncContext } from '../context/FuncContext.jsx';
     <div className='watchlist-topbar'>
         
     </div>
+    <div className='watchlist-box'>
+        
+    </div>
 </div>
