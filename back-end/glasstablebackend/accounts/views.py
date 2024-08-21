@@ -31,12 +31,17 @@ def login(request):
     serializer = UserSerializer(user)
     return Response({'token': token.key, 'user': serializer.data})
 
-#Added by myself, other login/token views from tutorial
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def logout(request):
-    user = get_object_or_404(User, username=request.data['username'])
-    request.user.auth_token.delete()
-    return Response("logged out!", status=status.HTTP_200_OK)
+    if request.user.is_authenticated:
+        try:
+            request.user.auth_token.delete()
+            return Response("Logged out!", status=status.HTTP_200_OK)
+        except (AttributeError, Token.DoesNotExist):
+            return Response({"detail": "Token not found."}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({"detail": "User not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])

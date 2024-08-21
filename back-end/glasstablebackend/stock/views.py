@@ -17,7 +17,7 @@ from .serializers import StockSerializer
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_stock(request):
-    stock = get_object_or_404(Stock, company=request.data.company)
+    stock = get_object_or_404(Stock, company=request.data["company"])
     serializer = StockSerializer(stock)
     return Response(serializer.data)
 
@@ -25,8 +25,8 @@ def get_stock(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @staff_member_required
-def add_stock(request):
-    stock, created = Stock.objects.get_or_create(company=request.data.company, defaults={'description':request.data.description, 'price':request.data.price, 'image':request.data.image,})
+def make_stock(request):
+    stock, created = Stock.objects.get_or_create(company=request.data["company"], defaults={'description':request.data["description"], 'price':request.data["price"], 'image':request.data["image"],})
     serializer = StockSerializer(stock)
     if(created):
         return Response("Stock created: " + serializer.data)
@@ -38,7 +38,7 @@ def add_stock(request):
 @permission_classes([IsAuthenticated])
 @staff_member_required
 def delete_stock(request):
-    stock = get_object_or_404(Stock, company=request.data.company)
+    stock = get_object_or_404(Stock, company=request.data["company"])
     serializer = StockSerializer(stock)
     return Response(stock.company + " deleted!")
     
@@ -47,8 +47,8 @@ def delete_stock(request):
 @permission_classes([IsAuthenticated])
 @staff_member_required
 def update_stock(request):
-    stock = get_object_or_404(Stock, company=request.data.company)
-    stock.update(company=request.data.company, description=request.data.description, price=request.data.price, image=request.data.image)
+    stock = get_object_or_404(Stock, company=request.data["company"])
+    stock.update(company=request.data['company'], description=request.data["description"], price=request.data["price"], image=request.data["image"])
     serializer = StockSerializer(stock)
     return Response("Watchlist updated: " + serializer.data)
 

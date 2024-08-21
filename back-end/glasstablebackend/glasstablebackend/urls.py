@@ -16,15 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from accounts import views
-from watchlist import views
-from stock import views
+from accounts import views as accounts_views
+from watchlist import views as watchlist_views
+from stock import views as stock_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login', views.login),
-    path('signup', views.signup),
-    path('logout', views.logout),
-    path('test_token', views.test_token),
-    path('get_watchlists', views.get_watchlists)
+
+    path('login', accounts_views.login),
+    path('signup', accounts_views.signup),
+    path('logout', accounts_views.logout),
+    path('test_token', accounts_views.test_token),
+
+    path('get_watchlists', watchlist_views.get_watchlists),
+    path('fetch_watchlist_stocks', watchlist_views.fetch_watchlist_stocks),
+    path('make_watchlist', watchlist_views.make_watchlist),
+    path('delete_watchlist', watchlist_views.delete_watchlist),
+    path('add_stock_to_watchlist', watchlist_views.add_stock_to_watchlist),
+    path('remove_stock_from_watchlist', watchlist_views.remove_stock_from_watchlist),
+
+    path('get_stock', stock_views.get_stock),
+    path('make_stock', stock_views.make_stock),
+    path('delete_stock', stock_views.delete_stock),
+    path('update_stock', stock_views.update_stock),
 ]

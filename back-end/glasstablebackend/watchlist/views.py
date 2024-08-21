@@ -27,7 +27,7 @@ def get_watchlists(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def fetch_watchlist_stocks(request):
-    watchlist = get_object_or_404(Watchlist,name=request.data.name,owner=request.user)
+    watchlist = get_object_or_404(Watchlist,name=request.data["name"],owner=request.user)
     stocks = watchlist.stocks.all()
     serializer = WatchlistSerializer(stocks, many = True)
     return Response(serializer.data)
@@ -36,7 +36,7 @@ def fetch_watchlist_stocks(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def make_watchlist(request):
-    watchlist, created = Watchlist.objects.get_or_create(name=request.data.name, owner=request.user)
+    watchlist, created = Watchlist.objects.get_or_create(name=request.data["name"], owner=request.user)
     serializer = WatchlistSerializer(watchlist)
     if(created):
         return Response("Watchlist created: " + serializer.data)
@@ -47,16 +47,16 @@ def make_watchlist(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_watchlist(request):
-    watchlist = get_object_or_404(Watchlist, name=request.data.name, owner=request.user)
+    watchlist = get_object_or_404(Watchlist, name=request.data["name"], owner=request.user)
     watchlist.delete()
-    return Response(request.data.name + " deleted!")
+    return Response(request.data["name"] + " deleted!")
 
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def add_stock_to_watchlist(request):
-    stock = get_object_or_404(Stock, name=request.data.stock_name)
-    watchlist = get_object_or_404(Watchlist, name=request.data.watchlist_name, user=request.user)
+    stock = get_object_or_404(Stock, name=request.data["stock_name"])
+    watchlist = get_object_or_404(Watchlist, name=request.data["watchlist_name"], user=request.user)
     watchlist.stocks.add(stock)
     return Response("Added " + stock.company + " stock to " + watchlist.name + " watchlist!")
 
@@ -64,7 +64,7 @@ def add_stock_to_watchlist(request):
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def remove_stock_from_watchlist(request):
-    stock = get_object_or_404(Stock, name=request.data.stock_name)
-    watchlist = get_object_or_404(Watchlist, name=request.data.watchlist_name, user=request.user)
+    stock = get_object_or_404(Stock, name=request.data["stock_name"])
+    watchlist = get_object_or_404(Watchlist, name=request.data["watchlist_name"], user=request.user)
     watchlist.stocks.remove(stock)
     return Response("Removed " + stock.company + " stock to " + watchlist.name + " watchlist!")
