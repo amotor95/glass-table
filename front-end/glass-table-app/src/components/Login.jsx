@@ -5,11 +5,13 @@ import {useState, useContext} from 'react';
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import { UserContext } from '../context/UserContext';
+import { FuncContext } from '../context/FuncContext';
 
 export function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const {User, setUser} = useContext(UserContext);
+    const {currentScreen, setCurrentScreen} = useContext(FuncContext)
 
     function getUser(event) {
         setUsername(event.target.value);
@@ -54,6 +56,7 @@ export function Login() {
                 loggedin: true,
                 token: response.data.token,
               }
+            setCurrentScreen("Watchlist")
             setUser(user)
         }).catch(error => {console.log(error + ", Login Failed!")});
     
