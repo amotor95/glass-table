@@ -10,7 +10,15 @@ import { FuncContext } from './context/FuncContext.jsx';
 import FuncBox from './components/FuncBox.jsx';
 
 function App() {
-    const [LoggedIn, setLoggedIn] = useState(false)
+    const user = {
+      email: "",
+      id: "-1",
+      password: "",
+      username: "",
+      loggedin: false,
+      token: "",
+    }
+    const [User, setUser] = useState(user)
     const [CurrentScreen, setCurrentScreen] = useState("Home")
     return (
       <div className="main-page">
@@ -22,7 +30,7 @@ function App() {
         <div className= "main-box-div">
 
           
-          <UserContext.Provider value={{LoggedIn, setLoggedIn}}>
+          <UserContext.Provider value={{User, setUser}}>
           <FuncContext.Provider value={{CurrentScreen, setCurrentScreen}}>
             <div className="login-sidebar">
               <SideBar></SideBar>

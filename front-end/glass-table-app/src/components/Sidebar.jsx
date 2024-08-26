@@ -4,7 +4,7 @@ import Button from '../components/button.jsx';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext.jsx';
 import { FuncContext } from '../context/FuncContext.jsx';
-
+import axios from 'axios';
 
 
 export function LoggedOutSidebar() {
@@ -18,12 +18,28 @@ export function LoggedOutSidebar() {
 }
 
 export function LoggedInSidebar() {
-    const {LoggedIn, setLoggedIn} = useContext(UserContext)
+    const {User, setUser} = useContext(UserContext)
     const {CurrentScreen, setCurrentScreen} = useContext(FuncContext);
     function LogOut() {
-        setLoggedIn(false);
-        setCurrentScreen("Home")
-        console.log("Logged out!")
+        axios.post('http://localhost:8000/logout', {}, {
+        headers: {
+            Authorization: 'Token ' + User.token,
+        }}).then(response => {
+            const user = {
+                email: "",
+                id: "-1",
+                password: "",
+                username: "",
+                loggedin: false,
+                token: "",
+              }
+            setCurrentScreen("Home")
+            console.log("Logged out!")
+            console.log(User.username + " requested logout from server!");
+            setUser(user);
+        }).catch(error => {
+            console.log("Logout with server failed!");
+        });
     }
     return(
         <div className="login-sidebar">
@@ -34,8 +50,8 @@ export function LoggedInSidebar() {
 }
 
 export function SideBar() {
-    const {LoggedIn, setLoggedIn} = useContext(UserContext)
-    if(LoggedIn) {
+    const {User, setUser} = useContext(UserContext)
+    if(User.loggedin) {
         return(LoggedInSidebar());
     } else {
         return(LoggedOutSidebar());

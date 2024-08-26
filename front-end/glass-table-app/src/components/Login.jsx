@@ -6,26 +6,10 @@ import axios from 'axios';
 import { render } from '@testing-library/react';
 import { UserContext } from '../context/UserContext';
 
-function TestToken({token}) {
-    axios.get('http://localhost:8000/login/test_token', {
-        headers: {
-            Authorization: 'Token ' + token
-        }
-    }).then(response => {
-        console.log(response.data);
-        return(true);
-    }).catch(error => {
-        console.log(error + ", token authentication failed!");
-        return(false);
-    });
-};
-
-
 export function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
-    const {LoggedIn, setLoggedIn} = useContext(UserContext);
+    const {User, setUser} = useContext(UserContext);
 
     function getUser(event) {
         setUsername(event.target.value);
@@ -35,11 +19,26 @@ export function Login() {
         setPassword(event.target.value);
     }
 
-    function OnLogin() {
-        //const [token, setToken] = useState("");
-
-        console.log(username + " " + password);
+    function TestToken() {
     
+        axios.get('http://localhost:8000/test_token', {
+            headers: {
+                Authorization: 'Token ' + User.token
+            }
+        }).then(response => {
+            console.log(response.data);
+            setUser({...User, loggedin: true});
+            return(true);
+        }).catch(error => {
+            console.log(error + ", token authentication failed!");
+            setUser({...User, loggedin: false});
+            return(false);
+        });
+    };
+
+    function OnLogin() {
+        console.log(username + " " + password);
+        
         axios.post('http://localhost:8000/login',
             {
                 username: username,
@@ -47,9 +46,15 @@ export function Login() {
             }
         ).then(response => {
             console.log("Login successful!")
-            setToken(response.data.token)
-            console.log(response.data.user)
-            setLoggedIn(true)
+            const user = {
+                email: response.data.user.email,
+                id: response.data.user.id,
+                password: response.data.user.password,
+                username: response.data.user.username,
+                loggedin: true,
+                token: response.data.token,
+              }
+            setUser(user)
         }).catch(error => {console.log(error + ", Login Failed!")});
     
         
