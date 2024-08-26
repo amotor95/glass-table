@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
+import Watchlist from './Watchlist.jsx';
 import { useContext, useState } from 'react';
 import { FuncContext } from '../context/FuncContext.jsx';
 
@@ -13,6 +14,10 @@ export function FuncBox() {
     } else if(CurrentScreen === "Login") {
         return(
             Login()
+        )
+    } else if(CurrentScreen ==="Watchlist") {
+        return(
+            Watchlist()
         )
     } else {
         return (
