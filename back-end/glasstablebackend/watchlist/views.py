@@ -15,7 +15,7 @@ from stock.models import Stock
 from .serializers import WatchlistSerializer
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+# @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_watchlists(request):
     watchlists = Watchlist.objects.filter(owner=request.user)
