@@ -1,17 +1,41 @@
 import React from 'react';
 import './Watchlist.css';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../context/UserContext.jsx';
 import { FuncContext } from '../context/FuncContext.jsx';
 
 
 
+
 function Watchlist() {
-    const myFunction = () => {
+    const {User, setUser} = useContext(UserContext);
+    const {Watchlists, setWatchlists} = useState([]);
+
+    const getWatchlists = () => {
+        axios.get('http://localhost:8000/get_watchlists', {
+            headers: {
+                Authorization: 'Token ' + User.token
+            }
+        })
+        .then(response => {
+            console.log("Watchlists sucessfully retrieved!");
+            console.log(response.data);
+        }).catch(error => {
+            console.log(error + ", failed to get watchlists!");
+        });
+
         document.getElementById("myDropdown").classList.toggle("show");
-        console.log("hit buttom");
     }
+
+    // function generateWatchlistButtons() {
+    //     return(
+    //         <div></div>
+    //     )
+    // }
+
+
+
     function filterFunction() {
         var input, filter, div, a, i;
         input = document.getElementById("myInput");
@@ -33,9 +57,9 @@ function Watchlist() {
         <div className='watchlist-screen'>
             <div className='watchlist-topbar'>
                 <div className="dropdown">
-                    <button onClick={myFunction} className="dropbtn">Dropdown</button>
+                    <button onClick={getWatchlists} className="dropbtn">Dropdown</button>
                     <div id="myDropdown" className="dropdown-content">
-                        <input type="text" placeholder="Search.." id="myInput" onKeyUp={filterFunction} />
+                        <input type="text" placeholder="Search..." id="myInput" onKeyUp={filterFunction} />
                         <a href="#about">About</a>
                         <a href="#base">Base</a>
                         <a href="#blog">Blog</a>

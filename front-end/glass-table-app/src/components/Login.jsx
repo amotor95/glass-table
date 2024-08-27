@@ -67,7 +67,7 @@ export function Login() {
     };
 
         return(
-            <div className= "functional-box">
+            <div className= "login-screen">
             <div className= "login-page">
             <div className= "login-title">Log In</div>
             <div className= "inputs">

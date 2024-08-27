@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
 import Watchlist from './Watchlist.jsx';
+import './FuncBox.css';
 import { useContext, useState } from 'react';
 import { FuncContext } from '../context/FuncContext.jsx';
 

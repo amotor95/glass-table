@@ -12,6 +12,9 @@ html, body, body > #root, .main-page {
     width: 100%;
     height: 10%;
     background-color: #4361ee;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .topbar-title {
@@ -32,8 +35,8 @@ html, body, body > #root, .main-page {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     background-color: #3a0ca3;
     background-image: url("./assets/glass-table-stock-market-image.jpg")
 }
