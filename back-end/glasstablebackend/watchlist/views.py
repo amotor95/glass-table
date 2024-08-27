@@ -68,3 +68,4 @@ def remove_stock_from_watchlist(request):
     watchlist = get_object_or_404(Watchlist, name=request.data["watchlist_name"], user=request.user)
     watchlist.stocks.remove(stock)
     return Response("Removed " + stock.company + " stock to " + watchlist.name + " watchlist!")
+

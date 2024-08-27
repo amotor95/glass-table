@@ -65,6 +65,7 @@ CORS_ORIGIN_WHITELIST = (
 
 CORS_ALLOW_HEADERS = [
     'authorization',
+    'content-type',
 ]
 
 REST_FRAMEWORK = {
