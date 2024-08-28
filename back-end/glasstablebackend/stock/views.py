@@ -14,7 +14,7 @@ from .serializers import StockSerializer
 # Create your views here.
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_stock(request):
     stock = get_object_or_404(Stock, company=request.data["company"])
