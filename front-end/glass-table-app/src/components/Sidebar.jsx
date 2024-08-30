@@ -52,9 +52,9 @@ export function LoggedInSidebar() {
 export function SideBar() {
     const {User, setUser} = useContext(UserContext)
     if(User.loggedin) {
-        return(LoggedInSidebar());
+        return(<LoggedInSidebar/>);
     } else {
-        return(LoggedOutSidebar());
+        return(<LoggedOutSidebar/>);
     }
 }
 

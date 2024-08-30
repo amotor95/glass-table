@@ -10,15 +10,15 @@ export function FuncBox() {
     const {CurrentScreen, setCurrentScreen} = useContext(FuncContext);
     if(CurrentScreen === "Home") {
         return(
-            Home()
+            <Home/>
         )
     } else if(CurrentScreen === "Login") {
         return(
-            Login()
+            <Login/>
         )
     } else if(CurrentScreen ==="Watchlist") {
         return(
-            Watchlist()
+            <Watchlist/>
         )
     } else {
         return (

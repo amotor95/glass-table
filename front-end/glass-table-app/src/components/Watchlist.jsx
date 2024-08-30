@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Watchlist.css';
 import axios from 'axios';
-import Card from './Card.jsx'
 import { useState, useContext } from 'react';
 import { UserContext } from '../context/UserContext.jsx';
+import { FuncContext } from '../context/FuncContext.jsx';
 
 
 
 
 function Watchlist() {
     const {User, setUser} = useContext(UserContext);
-    const [Watchlists, setWatchlists] = useState(null);
-    const [WatchlistStocks, setWatchlistStocks] = useState(null);
-    const [CurrentWatchlist, setCurrentWatchlist] = useState("Default");
-
+    const [Watchlists, setWatchlists] = useState([]);
 
     function getWatchlists() {
         axios.get('http://localhost:8000/get_watchlists', {
@@ -23,58 +20,35 @@ function Watchlist() {
         })
         .then(response => {
             console.log("Watchlists sucessfully retrieved!");
+            console.log(response.data);
             setWatchlists(response.data);
+
+            return response.data;
         }).catch(error => {
             console.log(error + ", failed to get watchlists!");
         });
     }
 
-    function showWatchlists() {
-        getWatchlists();
 
+    useEffect(() => {
+        getWatchlists();
+    }, [])
+
+    const showWatchlists = () => {
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
     function GenerateWatchlistLinks() {
-        console.log("Generating watchlist dropdown!")
-        console.log(Watchlists)
-        console.log("Is Watchlists an Array?: " + Array.isArray(Watchlists))
         if(Array.isArray(Watchlists)) {
-            return(
-                Watchlists.map((watchlist) => {
-                    return(<a href="#" onClick={() => {console.log("Set current watchlist to: " + watchlist.name); setCurrentWatchlist(watchlist.name)}}>{watchlist.name}</a>)
-                })
-            )
+            Watchlists.map((watchlist) => {
+                return(
+                    <a>{watchlist.name}</a>
+                )
+            })
         } else {
-            return(<div>No watchlists available</div>)
-        }
-    }
-
-    function GenerateWatchlistCards() {
-        console.log("Generating watchlist cards!")
-        axios.get('http://localhost:8000/fetch_watchlist_stocks', {
-            headers: {
-                Authorization: 'Token ' + User.token
-            },
-            body: {
-                company: CurrentWatchlist
-            }
-        })
-        .then(response => {
-            console.log("Watchlist stocks sucessfully retrieved!");
-            setWatchlistStocks(response.data);
-        }).catch(error => {
-            console.log(error + ", failed to get watchlist stocks!");
-        });
-
-        if(Array.isArray(WatchlistStocks)) {
             return(
-                WatchlistStocks.map((stock) => {
-                    return(<Card name={stock.company} price={stock.price}></Card>)
-                })
+                <div>Watchlists didn't load!</div>
             )
-        } else {
-            return(<div>No stocks available</div>)
         }
     }
 
@@ -87,7 +61,6 @@ function Watchlist() {
         filter = input.value.toUpperCase();
         div = document.getElementById("myDropdown");
         a = div.getElementsByTagName("a");
-
         for (i = 0; i < a.length; i++) {
             var txtValue = a[i].textContent || a[i].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -97,22 +70,26 @@ function Watchlist() {
             }
         }
     }
-
     
-
     return(
         <div className='watchlist-screen'>
             <div className='watchlist-topbar'>
                 <div className="dropdown">
-                    <button onClick={() => showWatchlists()} className="dropbtn">Dropdown</button>
+                    <button onClick={showWatchlists} className="dropbtn">Dropdown</button>
                     <div id="myDropdown" className="dropdown-content">
-                        <input type="text" placeholder="Search..." id="myInput" onKeyUp={filterFunction} />
-                        <GenerateWatchlistLinks></GenerateWatchlistLinks>
+                        <input type="text" placeholder="Search..." id="myInput" onKeyUp={filterFunction}/>
+                        { Array.isArray(Watchlists) ? (
+                            Watchlists.map((watchlist, index) => (
+                                <a key={index}>{watchlist.name}</a>  // Render each watchlist link
+                            ))
+                        ) :
+                            <div>Watchlists didn't load!</div>  // If watchlists are not loaded or empty
+                        }
                     </div>
                 </div>
             </div>
             <div className='watchlist-box'>
-                <GenerateWatchlistCards></GenerateWatchlistCards>
+                
             </div>
         </div>
     )

@@ -24,7 +24,7 @@ def get_watchlists(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def fetch_watchlist_stocks(request):
     watchlist = get_object_or_404(Watchlist,name=request.data["name"],owner=request.user)
