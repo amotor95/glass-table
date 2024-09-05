@@ -93,6 +93,23 @@ function Watchlist() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
+    function deleteWatchlist({watchlist_to_delete}) {
+        axios.post('http://localhost:8000/delete_watchlist', {
+            headers: {
+                Authorization: 'Token ' + User.token,
+            },
+            data: {
+                name: watchlist_to_delete,
+            },
+        })
+        .then(response => {
+            console.log(watchlist_to_delete + " sucessfully deleted!");
+            setCurrentWatchlist(DefaultWatchlist)
+        }).catch(error => {
+            console.log(error + ", failed to delete watchlist!");
+        });
+    }
+
 
 
     function filterFunction() {
@@ -128,6 +145,8 @@ function Watchlist() {
                         <a>+ Create Watchlist</a>
                     </div>
                 </div>
+                {CurrentWatchlist === DefaultWatchlist ? "" : <button className="watchlist-delete-button" onClick={()=>deleteWatchlist()}>Delete Watchlist</button> }
+                
             </div>
             <div className='watchlist-box'>
             {console.log("Current watchlist: " + CurrentWatchlist)}
