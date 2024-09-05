@@ -19,6 +19,7 @@ from django.urls import path, re_path
 from accounts import views as accounts_views
 from watchlist import views as watchlist_views
 from stock import views as stock_views
+from user_profile import views as user_profile_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,9 +35,12 @@ urlpatterns = [
     path('delete_watchlist', watchlist_views.delete_watchlist),
     path('add_stock_to_watchlist', watchlist_views.add_stock_to_watchlist),
     path('remove_stock_from_watchlist', watchlist_views.remove_stock_from_watchlist),
+    path('get_home_watchlist', watchlist_views.get_home_watchlist),
 
     path('get_stock', stock_views.get_stock),
     path('make_stock', stock_views.make_stock),
     path('delete_stock', stock_views.delete_stock),
     path('update_stock', stock_views.update_stock),
+
+    path('get_default_watchlist', user_profile_views.get_default_watchlist),
 ]

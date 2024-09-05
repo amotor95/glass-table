@@ -1,15 +1,15 @@
 import React from 'react';
-import './Card.css';
+import './WatchlistCard.css';
 
 
 
-function Card({imgSrc, cardName, cardPrice}) {
+function WatchlistCard({imgSrc, cardName, cardPrice}) {
 
     return(
-        <div className='card-container'>
-            <img className="card-img" src = {imgSrc} alt = "placeholder img"></img>
-            <h2 className="card-title">{cardName}</h2>
-            <p className="card-description">Price: {cardPrice}</p>
+        <div className='watchlist-card-container'>
+            <img className="watchlist-card-img" src = {imgSrc} alt = "placeholder img"></img>
+            <h2 className="watchlist-card-title">{cardName}</h2>
+            <p className="watchlist-card-description">Price: {cardPrice}</p>
         </div>
     );
 }
@@ -40,4 +40,4 @@ function Card({imgSrc, cardName, cardPrice}) {
 //     );
 //   };
 
-export default Card
+export default WatchlistCard

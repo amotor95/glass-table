@@ -52,7 +52,13 @@
   min-width: 100%;
   animation: scroll 40s linear infinite;
   /* animation-direction: reverse; */
+  align-items: center;
 }
+
+.row-container {
+  height: 80%;
+}
+
 
 /* @keyframes slide {
     from {
@@ -73,3 +79,7 @@
     }
   }
 
+
+  .home-card {
+    height: 80%;
+  }

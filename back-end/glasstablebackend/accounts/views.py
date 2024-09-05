@@ -7,6 +7,9 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.contrib.auth.password_validation import validate_password
 
 from .serializers import UserSerializer
 
@@ -14,8 +17,16 @@ from .serializers import UserSerializer
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
+        try:
+            validate_email(request.data.email)
+        except ValidationError:
+            return Response({'error': 'Invalid email address'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            validate_password(request.data.password)
+        except ValidationError as e:
+            return Response({'error': list(e.messages)}, status=status.HTTP_400_BAD_REQUEST)
         serializer.save()
-        user = User.objects.get(username=request.data['username'])
+        user = User.objects.get(username=request.data['username'], email=request.data['email'], first_name=request.data['first_name'], last_name=request.data['last_name'])
         user.set_password(request.data['password'])
         user.save()
         token = Token.objects.create(user=user)

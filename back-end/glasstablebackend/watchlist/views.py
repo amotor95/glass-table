@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from .models import Watchlist
 from stock.models import Stock
 from .serializers import WatchlistSerializer
+from stock.serializers import StockSerializer
 
 @api_view(['GET'])
 # @authentication_classes([SessionAuthentication, TokenAuthentication])
@@ -27,9 +28,9 @@ def get_watchlists(request):
 #@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def fetch_watchlist_stocks(request):
-    watchlist = get_object_or_404(Watchlist,name=request.data["name"],owner=request.user)
+    watchlist = get_object_or_404(Watchlist,name=request.GET["name"],owner=request.user)
     stocks = watchlist.stocks.all()
-    serializer = WatchlistSerializer(stocks, many = True)
+    serializer = StockSerializer(stocks, many = True)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -69,3 +70,9 @@ def remove_stock_from_watchlist(request):
     watchlist.stocks.remove(stock)
     return Response("Removed " + stock.company + " stock to " + watchlist.name + " watchlist!")
 
+@api_view(['GET'])
+def get_home_watchlist(request):
+    watchlist = get_object_or_404(Watchlist,name="Home Watchlist")
+    stocks = watchlist.stocks.all()
+    serializer = StockSerializer(stocks, many = True)
+    return Response(serializer.data)

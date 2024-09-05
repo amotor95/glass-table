@@ -12,7 +12,7 @@ export function LoggedOutSidebar() {
     return(
         <div className="login-sidebar">
             <Button className= "sidebar-button" onClick={()=>{setCurrentScreen("Login")}} text="Login"></Button>
-            <Button className= "sidebar-button" text="Sign Up"></Button>
+            <Button className= "sidebar-button" onClick={() => {setCurrentScreen("Signup")}}text="Sign Up"></Button>
         </div>
     );
 }
@@ -43,7 +43,7 @@ export function LoggedInSidebar() {
     }
     return(
         <div className="login-sidebar">
-            <div>Welcome user</div>
+            <div className="welcome-div">Welcome {User.username}!</div>
             <Button className= "sidebar-button" onClick={()=>LogOut()} text="Logout"></Button>
         </div>
     );

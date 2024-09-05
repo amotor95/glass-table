@@ -1,5 +1,5 @@
 import './App.css';
-import Card from './components/Card.jsx'
+import Card from './components/WatchlistCard.jsx'
 import Login from './components/Login.jsx'
 import { LoggedInSidebar, LoggedOutSidebar, SideBar } from './components/Sidebar.jsx';
 import React, { useState, useContext, createContext } from 'react';

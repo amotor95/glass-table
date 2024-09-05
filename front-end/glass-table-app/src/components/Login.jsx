@@ -39,7 +39,6 @@ export function Login() {
     };
 
     function OnLogin() {
-        console.log(username + " " + password);
         
         axios.post('http://localhost:8000/login',
             {
@@ -70,11 +69,11 @@ export function Login() {
             <div className= "login-screen">
             <div className= "login-page">
             <div className= "login-title">Log In</div>
-            <div className= "inputs">
-                <input className= "input-text" onChange={getUser} type="text" placeholder='Username'/>
-                <input className= "input-text" onChange={getPassword} type="password" placeholder="Password"/>
+            <div className= "login-inputs">
+                <input className= "login-input-text" onChange={getUser} type="text" placeholder='Username'/>
+                <input className= "login-input-text" onChange={getPassword} type="password" placeholder="Password"/>
             </div>
-            <div className="button-div"><Button className="login-button" text="Login" onClick={() => OnLogin()}></Button></div>
+            <div className="login-button-div"><Button className="login-button" text="Login" onClick={() => OnLogin()}></Button></div>
             </div>
             </div>
         );

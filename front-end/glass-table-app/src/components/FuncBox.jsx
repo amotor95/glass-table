@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './Login.jsx';
+import Signup from './Signup.jsx';
 import Home from './Home.jsx';
 import Watchlist from './Watchlist.jsx';
 import './FuncBox.css';
@@ -15,6 +16,10 @@ export function FuncBox() {
     } else if(CurrentScreen === "Login") {
         return(
             <Login/>
+        )
+    } else if(CurrentScreen === "Signup") {
+        return(
+            <Signup/>
         )
     } else if(CurrentScreen ==="Watchlist") {
         return(

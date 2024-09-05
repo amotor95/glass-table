@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-.login-screen {
+.signup-screen {
     width: 100%;
     height: 100%;
     display: flex;
@@ -14,34 +14,38 @@
 }
 
 
-.login-page {
+.signup-page {
     height: 75%;
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: #f72585;
     border-radius: 2vw;
+    /* row-gap: 10%; */
 }
 
-.login-title {
+.signup-title {
     font-size: 20px;
     font-size: 2.5vw;
-    padding-bottom: 3vw;
+    height: 20%;
     color: #80ed99;
+    align-content: center;
+
 }
 
-.login-inputs {
-    width: 25%;
-    height: 20%;
+.signup-inputs {
+    /* height: 80%; */
     display: flex;
     flex-direction: column;
-    row-gap: 20%;
-    width: 50%;
+    row-gap: 8%;
+    align-items: center;
+    width: 75%;
+    height: 70%;
 }
 
-.login-input-text {
+.signup-input-text {
     color:#f72585;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -50,23 +54,40 @@
     border-radius: 4px;
     line-height: 10px;
     border-color:blue;
+    width: 75%;
 }
 
-.login-input-text::placeholder {
+.signup-button-div {
+    height: 10%;
+}
+
+.signup-input-text::placeholder {
     color:#f72585;
 }
 
-.login-input-text:focus {
+.signup-input-text:focus {
     border-color:#80ed99;
     border-width: 2px;
     outline: 0;
     box-shadow: 5px 10px #80ed99;
 }
 
-.login-login-button-div {
-    padding-top: 3vw;
+
+.signup-input-text:not(:focus) + .signup-title {
+    opacity: .5;
 }
 
-.login-input-text:not(:focus) + .login-title {
-    opacity: .5;
+.show-pass-button {
+    color:#f72585;
+    background-color: #80ed99;
+    width: 50%;
+    font-weight: 700;
+    align-self: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 8px;
+    font-size: 1rem;
+    border-radius: 4px;
+    line-height: 10px;
+    border-color:blue;
 }
