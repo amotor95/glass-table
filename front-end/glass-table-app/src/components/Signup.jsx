@@ -16,6 +16,8 @@ export function Signup() {
     const {User, setUser} = useContext(UserContext);
     const {currentScreen, setCurrentScreen} = useContext(FuncContext);
     const [ShowPassword, setShowPassword] = useState(false);
+    const [Error, setError] = useState("Unknown Error");
+    const [ShowError, setShowError] = useState(false);
 
     function toggleShowPassword() {
         setShowPassword(!ShowPassword);
@@ -63,7 +65,11 @@ export function Signup() {
               }
             setCurrentScreen("Watchlist")
             setUser(user)
-        }).catch(error => {console.log(error + ", Signup Failed!")});
+        }).catch(error => {
+            console.log(error + ", Signup Failed!")
+            setError(error)
+            setShowError(true)
+        });
     
         
     
@@ -81,6 +87,7 @@ export function Signup() {
                         <input className= "signup-input-text" onChange={getUsername} type="text" placeholder="Username"/>
                         <input className= "signup-input-text" onChange={getPassword} type={ShowPassword ? "text" : "password"} placeholder='Password'/>
                         <button className = "show-pass-button" onClick={() => toggleShowPassword()}>{ShowPassword ? "Hide Password" : "Show Password"}</button>
+                        <div className="signup-error-message">{ShowError ? {Error} : ""}</div>
                     </div>
                     <div className="signup-button-div"><Button className="signup-button" text="Signup" onClick={() => OnSignup()}></Button></div>
                 </div>

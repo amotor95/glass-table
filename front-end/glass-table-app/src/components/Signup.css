@@ -91,3 +91,8 @@
     line-height: 10px;
     border-color:blue;
 }
+
+.signup-error-message {
+    color:#3a0ca3;
+    font-size: 10px;
+}
