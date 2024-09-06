@@ -52,3 +52,10 @@ def update_stock(request):
     serializer = StockSerializer(stock)
     return Response("Watchlist updated: " + serializer.data)
 
+@api_view(['GET'])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_all_stocks(request):
+    stocks = Stock.objects.all()
+    serializer = StockSerializer(stocks, many=True)
+    return Response(serializer.data)

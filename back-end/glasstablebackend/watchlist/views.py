@@ -34,7 +34,7 @@ def fetch_watchlist_stocks(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def make_watchlist(request):
     watchlist, created = Watchlist.objects.get_or_create(name=request.data["name"], owner=request.user)
@@ -45,7 +45,7 @@ def make_watchlist(request):
         return Response("Watchlist already exists: " + serializer.data)
 
 @api_view(['POST'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_watchlist(request):
     watchlist = get_object_or_404(Watchlist, name=request.data["name"], owner=request.user)
@@ -53,7 +53,7 @@ def delete_watchlist(request):
     return Response(request.data["name"] + " deleted!")
 
 @api_view(['POST'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
+#@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def add_stock_to_watchlist(request):
     stock = get_object_or_404(Stock, name=request.data["stock_name"])

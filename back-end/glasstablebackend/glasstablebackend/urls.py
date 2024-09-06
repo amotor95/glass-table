@@ -41,6 +41,7 @@ urlpatterns = [
     path('make_stock', stock_views.make_stock),
     path('delete_stock', stock_views.delete_stock),
     path('update_stock', stock_views.update_stock),
+    path('get_all_stocks', stock_views.get_all_stocks),
 
     path('get_default_watchlist', user_profile_views.get_default_watchlist),
 ]
