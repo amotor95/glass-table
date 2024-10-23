@@ -44,8 +44,8 @@ export function Signup() {
     }
 
     function OnSignup() {
-        //'https://glass-table-production.up.railway.app/signup'
-        axios.post('http://localhost:8000/signup',
+        //''http://localhost:8000/signup''
+        axios.post('https://glass-table-production.up.railway.app/signup',
             {
                 username: username,
                 password: password,
