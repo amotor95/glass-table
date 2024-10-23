@@ -19,7 +19,18 @@
 .trading-topbar {
     display:flex;
     flex-direction: row;
-    background-color:aqua
+    background-color:aqua;
+}
+
+.account-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    background-color:aqua;
+    row-gap: 10%;
+    padding-left: 2vw;
 }
 
 .terminal {
@@ -41,7 +52,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     overflow: scroll;
-    background-color:blue
+    background-color:blue;
 }
 
 .ticker-input {

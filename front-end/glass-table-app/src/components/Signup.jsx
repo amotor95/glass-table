@@ -45,7 +45,7 @@ export function Signup() {
 
     function OnSignup() {
         
-        axios.post('http://localhost:8000/signup',
+        axios.post('glass-table-production.up.railway.app/signup',
             {
                 email: email,
                 username: username,

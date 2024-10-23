@@ -21,7 +21,7 @@ export function LoggedInSidebar() {
     const {User, setUser} = useContext(UserContext)
     const {CurrentScreen, setCurrentScreen} = useContext(FuncContext);
     function LogOut() {
-        axios.post('http://localhost:8000/logout', {}, {
+        axios.post('glass-table-production.up.railway.app/logout', {}, {
         headers: {
             Authorization: 'Token ' + User.token,
         }}).then(response => {
