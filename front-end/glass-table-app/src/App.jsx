@@ -11,7 +11,7 @@ import FuncBox from './components/FuncBox.jsx';
 
 function App() {
     const user = {
-      email: "",
+      // email: "",
       id: "-1",
       password: "",
       username: "",

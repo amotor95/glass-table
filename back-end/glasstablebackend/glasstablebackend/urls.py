@@ -27,7 +27,6 @@ urlpatterns = [
     path('login', accounts_views.login),
     path('signup', accounts_views.signup),
     path('logout', accounts_views.logout),
-    path('test_token', accounts_views.test_token),
 
     path('get_watchlists', watchlist_views.get_watchlists),
     path('fetch_watchlist_stocks', watchlist_views.fetch_watchlist_stocks),

@@ -48,7 +48,34 @@ export function Login() {
         ).then(response => {
             console.log("Login successful!")
             const user = {
-                email: response.data.user.email,
+                // email: response.data.user.email,
+                id: response.data.user.id,
+                password: response.data.user.password,
+                username: response.data.user.username,
+                loggedin: true,
+                token: response.data.token,
+              }
+            setCurrentScreen("Watchlist")
+            setUser(user)
+        }).catch(error => {console.log(error + ", Login Failed!")});
+    
+        
+    
+        return(console.log("OnLogin function concluded!"));
+    
+    };
+
+    function OnGuestLogin() {
+        
+        axios.post('https://glass-table-production.up.railway.app/login',
+            {
+                username: "jsmith",
+                password: "guestpassword123"
+            }
+        ).then(response => {
+            console.log("Guest login successful!")
+            const user = {
+                // email: response.data.user.email,
                 id: response.data.user.id,
                 password: response.data.user.password,
                 username: response.data.user.username,
@@ -74,6 +101,7 @@ export function Login() {
                         <input className= "login-input-text" onChange={getPassword} type="password" placeholder="Password"/>
                     </div>
                     <div className="login-button-div"><Button className="login-button" text="Login" onClick={() => OnLogin()}></Button></div>
+                    <div className="guest-button-div"><Button className="guest-button" text="Guest Login" onClick={() => OnGuestLogin()}></Button></div>
                 </div>
             </div>
         );

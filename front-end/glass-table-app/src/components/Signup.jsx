@@ -8,7 +8,7 @@ import { UserContext } from '../context/UserContext';
 import { FuncContext } from '../context/FuncContext';
 
 export function Signup() {
-    const [email, setEmail] = useState("");
+    // const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
@@ -31,9 +31,9 @@ export function Signup() {
         setPassword(event.target.value);
     }
 
-    function getEmail(event) {
-        setEmail(event.target.value);
-    }
+    // function getEmail(event) {
+    //     setEmail(event.target.value);
+    // }
 
     function getFirstName(event) {
         setFirstName(event.target.value);
@@ -47,7 +47,7 @@ export function Signup() {
         
         axios.post('https://glass-table-production.up.railway.app/signup',
             {
-                email: email,
+                // email: email,
                 username: username,
                 password: password,
                 first_name: first_name,
@@ -56,7 +56,7 @@ export function Signup() {
         ).then(response => {
             console.log("Signup successful!")
             const user = {
-                email: response.data.user.email,
+                // email: response.data.user.email,
                 id: response.data.user.id,
                 password: response.data.user.password,
                 username: response.data.user.username,
@@ -85,7 +85,7 @@ export function Signup() {
                     <div className= "signup-inputs">
                         <input className= "signup-input-text" onChange={getFirstName} type="text" placeholder='First Name'/>
                         <input className= "signup-input-text" onChange={getLastName} type="text" placeholder="Last Name"/>
-                        <input className= "signup-input-text" onChange={getEmail} type="text" placeholder='Email'/>
+                        {/* <input className= "signup-input-text" onChange={getEmail} type="text" placeholder='Email'/> */}
                         <input className= "signup-input-text" onChange={getUsername} type="text" placeholder="Username"/>
                         <input className= "signup-input-text" onChange={getPassword} type={ShowPassword ? "text" : "password"} placeholder='Password'/>
                         <div className="signup-error-message">{ShowError ? Error.toString() : ""}</div>

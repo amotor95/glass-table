@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
+# from django.core.validators import validate_email
 from django.contrib.auth.password_validation import validate_password
 
 from watchlist.models import Watchlist
@@ -20,11 +20,11 @@ from .serializers import UserSerializer
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        try:
-            validate_email(request.data["email"])
-        except ValidationError:
-            print("Bad email")
-            return Response({'error': 'Invalid email address'}, status=status.HTTP_400_BAD_REQUEST)
+        # try:
+        #     validate_email(request.data["email"])
+        # except ValidationError:
+        #     print("Bad email")
+        #     return Response({'error': 'Invalid email address'}, status=status.HTTP_400_BAD_REQUEST)
         try:
             validate_password(request.data["password"])
         except ValidationError as e:
@@ -68,8 +68,3 @@ def logout(request):
     else:
         return Response({"detail": "User not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
 
-@api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
-@permission_classes([IsAuthenticated])
-def test_token(request):
-    return Response("passed for {}".format(request.user.email))
