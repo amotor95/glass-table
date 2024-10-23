@@ -59,7 +59,7 @@ def buy_stock(request):
         stock = Stock.objects.create(
             ticker=request.data["ticker"],
             quantity=int(request.data["quantity"]),
-            buy_price=int(request.data["price"]),
+            buy_price=Decimal(request.data["price"]),
             owner=request.user
         )
     userprofile = UserProfile.objects.get(user=request.user)
