@@ -184,11 +184,10 @@ function Watchlist() {
                         <a className="watchlist-link" id="create-watchlist" onClick={()=> makeWatchlist()}>+ Create Watchlist</a>
                     </div>
                 </div>
-                <div className="stocks-dropdown">
+                <div className="stocks-search">
                         <input type="text" placeholder="Add Ticker..." id="stocks-myInput"/>
                         <button onClick={() => {add_stock()}} className="stocks-addbtn">+</button>
-                </div>
-                {CurrentWatchlist === "Default" ? "" : <button className="watchlist-delete-button" onClick={()=>deleteWatchlist()}>Delete Watchlist</button> }
+                </div>{CurrentWatchlist === "Default" ? "" : <div className="delete-button-div"><button className="watchlist-delete-button" onClick={()=>deleteWatchlist()}>Delete Watchlist</button></div>}
             </div>
             <div className='watchlist-box'>
             { Array.isArray(Stocks) ? (

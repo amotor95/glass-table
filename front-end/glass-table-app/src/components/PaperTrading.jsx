@@ -256,16 +256,24 @@ export function PaperTrading() {
     return (
         <div className="paperbox">
             <div className="trading">
-                <div className="terminal">
-                    <input type="text" onChange={getStockInput} className="ticker-input" placeholder="Enter a stock ticker"></input>
-                    <div>Current Stock: {CurrentStock}</div>
-                    <div>Price: {isNaN(CurrentStockPrice) ? "" : formatter.format(CurrentStockPrice)}</div>
-                    <div>Account Value: {formatter.format(AccountValue)}</div>
-                    <div>Cash: {formatter.format(Cash)}</div>
-                    <input type="text" onChange={getQuantityInput} className="quantity-input" placeholder="Enter a quantity"></input>
-                    <button onClick={() => buyStock(CurrentStock)}>BUY</button>
-                    <button onClick={() => sellStock(CurrentStock)}>SELL</button>
-                    
+                <div className="trading-topbar">
+                    <div className="account-info">
+                        <div className="account-info-content">
+                            <div>Account Value: {formatter.format(AccountValue)}</div>
+                            <div>Cash: {formatter.format(Cash)}</div>
+                        </div>
+                    </div>
+                    <div className="terminal">
+                        <input type="text" onChange={getStockInput} className="ticker-input" placeholder="Enter a stock ticker"></input>
+                        <div>Current Stock: {CurrentStock}</div>
+                        <div>Price: {isNaN(CurrentStockPrice) ? "" : formatter.format(CurrentStockPrice)}</div>
+                        <div className="buying-div">
+                            <input type="text" onChange={getQuantityInput} className="quantity-input" placeholder="Enter a quantity"></input>
+                            <button onClick={() => buyStock(CurrentStock)}>BUY</button>
+                            <button onClick={() => sellStock(CurrentStock)}>SELL</button>
+                        </div>
+                        
+                    </div>
                 </div>
                 <div className='stock-box'>
                 { Array.isArray(Stocks) ? (
