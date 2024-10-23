@@ -19,6 +19,7 @@ from .serializers import UserSerializer
 @api_view(['POST'])
 def signup(request):
     serializer = UserSerializer(data=request.data)
+    print("Signup started!")
     if serializer.is_valid():
         # try:
         #     validate_email(request.data["email"])
@@ -37,15 +38,16 @@ def signup(request):
         user.set_password(request.data['password'])
         user.save()
         token = Token.objects.create(user=user)
-        print("User created")
         default_watchlist = Watchlist.objects.create(name="Default", owner=user)
         default_watchlist.stocks = "AAPL,MSFT,GOOGL,AMZN,TSLA"
         default_watchlist.save()
-        user_profile = UserProfile.objects.create(owner=user)
-        user_profile.balance = 50000
+        user_profile = UserProfile.objects.create(user=user)
+        user_profile.cash = 50000
+        user_profile.account_value = 50000
         user_profile.save()
+        print("User profile made")
         return Response({'token': token.key, 'user': serializer.data})
-    return Response(serializer.errors, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def login(request):

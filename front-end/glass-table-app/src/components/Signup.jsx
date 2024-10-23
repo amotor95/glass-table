@@ -44,10 +44,9 @@ export function Signup() {
     }
 
     function OnSignup() {
-        
-        axios.post('https://glass-table-production.up.railway.app/signup',
+        //'https://glass-table-production.up.railway.app/signup'
+        axios.post('http://localhost:8000/signup',
             {
-                // email: email,
                 username: username,
                 password: password,
                 first_name: first_name,
@@ -56,9 +55,6 @@ export function Signup() {
         ).then(response => {
             console.log("Signup successful!")
             const user = {
-                // email: response.data.user.email,
-                id: response.data.user.id,
-                password: response.data.user.password,
                 username: response.data.user.username,
                 loggedin: true,
                 token: response.data.token,
@@ -72,9 +68,6 @@ export function Signup() {
             setError(errorMessage);
             setShowError(true);
         });
-    
-        
-    
         return(console.log("OnSignup function concluded!"));
     };
 

@@ -48,9 +48,6 @@ export function Login() {
         ).then(response => {
             console.log("Login successful!")
             const user = {
-                // email: response.data.user.email,
-                id: response.data.user.id,
-                password: response.data.user.password,
                 username: response.data.user.username,
                 loggedin: true,
                 token: response.data.token,
@@ -75,9 +72,6 @@ export function Login() {
         ).then(response => {
             console.log("Guest login successful!")
             const user = {
-                // email: response.data.user.email,
-                id: response.data.user.id,
-                password: response.data.user.password,
                 username: response.data.user.username,
                 loggedin: true,
                 token: response.data.token,
