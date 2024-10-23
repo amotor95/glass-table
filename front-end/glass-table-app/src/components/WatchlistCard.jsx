@@ -1,15 +1,21 @@
 import React from 'react';
 import './WatchlistCard.css';
 
+// Create a number formatter for USD
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
-
-function WatchlistCard({imgSrc, cardName, cardPrice}) {
+function WatchlistCard({imgSrc, cardName, cardPrice, cardTicker, remove_stock}) {
 
     return(
         <div className='watchlist-card-container'>
             <img className="watchlist-card-img" src = {imgSrc} alt = "placeholder img"></img>
+            <h1 className="watchlist-ticker">{cardTicker}</h1>
             <h2 className="watchlist-card-title">{cardName}</h2>
-            <p className="watchlist-card-description">Price: {cardPrice}</p>
+            <p className="watchlist-card-description">Price: {formatter.format(cardPrice)}</p>
+            <button className="watchlist-card-deletebtn" onClick={()=>remove_stock(cardTicker)}>Delete</button>
         </div>
     );
 }

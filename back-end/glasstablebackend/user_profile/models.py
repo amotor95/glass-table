@@ -5,5 +5,7 @@ from watchlist.models import Watchlist
 # Create your models here.
 
 class UserProfile(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    default_watchlist = models.OneToOneField(Watchlist, blank=True, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cash = models.DecimalField(max_digits=10, decimal_places=2, default=50000)
+    account_value = models.DecimalField(max_digits=10, decimal_places=2, default=50000)
+    leaderboard = models.BooleanField(default=True)

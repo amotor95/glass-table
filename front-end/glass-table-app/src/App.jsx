@@ -20,6 +20,7 @@ function App() {
     }
     const [User, setUser] = useState(user)
     const [CurrentScreen, setCurrentScreen] = useState("Home")
+    document.title = "Glass Table";
     return (
       <div className="main-page">
 

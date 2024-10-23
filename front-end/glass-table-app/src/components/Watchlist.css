@@ -16,7 +16,6 @@
     height: 20%;
     display:flex;
     flex-direction: row;
-    column-gap: 25%;
     align-items: center;
 }
 
@@ -132,25 +131,6 @@
 /* The search field when it gets focus/clicked on */
 #stocks-myInput:focus {outline: 3px solid #ddd;}
 
-/* The container <div> - needed to position the dropdown content */
-.stocks-dropdown {
-  position: relative;
-  left: 2em;
-  top: 2em;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.stocks-dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  
-  z-index: 1;
-}
-
 /* Links inside the dropdown */
 .stocks-dropdown-content a {
   color: black;
@@ -221,18 +201,16 @@
     width: fit-content;
     text-wrap: nowrap;
     height: 40px;
+    opacity: .5;
 }
 
 .watchlist-delete-button:hover,
 .watchlist-delete-button:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #FF4742;
+  color:#f1f1f1;
+  background-color: #FF4742;
+  opacity: 1;
 }
 
-.watchlist-delete-button:active {
-  opacity: .5;
-}
 
 .watchlist-link {
   cursor: pointer;
@@ -240,4 +218,25 @@
 
 .stocks-link {
   cursor:pointer;
+}
+
+.stocks-container {
+  display: flex;
+  align-items: center;
+}
+
+.stocks-addbtn {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  height: 5vh;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  text-wrap: nowrap;
+  margin-left: 10px; /* Add some space between the input and button */
 }

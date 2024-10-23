@@ -1,0 +1,14 @@
+.paperbox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.trading {
+    width: 80%;
+}
+
+.leaderboard {
+    width:20%;
+}
+

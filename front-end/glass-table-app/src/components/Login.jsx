@@ -66,15 +66,15 @@ export function Login() {
     };
 
         return(
-            <div className= "login-screen">
-            <div className= "login-page">
-            <div className= "login-title">Log In</div>
-            <div className= "login-inputs">
-                <input className= "login-input-text" onChange={getUser} type="text" placeholder='Username'/>
-                <input className= "login-input-text" onChange={getPassword} type="password" placeholder="Password"/>
-            </div>
-            <div className="login-button-div"><Button className="login-button" text="Login" onClick={() => OnLogin()}></Button></div>
-            </div>
+            <div className="login-box">
+                <div className= "login-page">
+                    <div className= "login-title">Log In</div>
+                    <div className= "login-inputs">
+                        <input className= "login-input-text" onChange={getUser} type="text" placeholder='Username'/>
+                        <input className= "login-input-text" onChange={getPassword} type="password" placeholder="Password"/>
+                    </div>
+                    <div className="login-button-div"><Button className="login-button" text="Login" onClick={() => OnLogin()}></Button></div>
+                </div>
             </div>
         );
 }

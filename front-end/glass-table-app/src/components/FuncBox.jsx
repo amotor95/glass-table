@@ -3,6 +3,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import Home from './Home.jsx';
 import Watchlist from './Watchlist.jsx';
+import PaperTrading from './PaperTrading.jsx';
 import './FuncBox.css';
 import { useContext, useState } from 'react';
 import { FuncContext } from '../context/FuncContext.jsx';
@@ -21,9 +22,13 @@ export function FuncBox() {
         return(
             <Signup/>
         )
-    } else if(CurrentScreen ==="Watchlist") {
+    } else if(CurrentScreen === "Watchlist") {
         return(
             <Watchlist/>
+        )
+    } else if(CurrentScreen === "PaperTrading") {
+        return(
+            <PaperTrading/>
         )
     } else {
         return (

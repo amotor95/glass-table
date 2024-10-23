@@ -17,7 +17,7 @@
     border-radius: 1rem 1rem 0 0;
   }
   
-  .home-card-title {
+  .home-card-title, .home-card-ticker {
     margin: 0.5rem 5%;
     align-self: center;
   }

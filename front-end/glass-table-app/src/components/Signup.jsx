@@ -66,9 +66,11 @@ export function Signup() {
             setCurrentScreen("Watchlist")
             setUser(user)
         }).catch(error => {
-            console.log(error + ", Signup Failed!")
-            setError(error)
-            setShowError(true)
+            console.log(error);
+            const errorMessage = error.response?.data?.message || error.message || error.toString();
+            console.log(errorMessage + ", Signup Failed!");
+            setError(errorMessage);
+            setShowError(true);
         });
     
         
@@ -86,9 +88,9 @@ export function Signup() {
                         <input className= "signup-input-text" onChange={getEmail} type="text" placeholder='Email'/>
                         <input className= "signup-input-text" onChange={getUsername} type="text" placeholder="Username"/>
                         <input className= "signup-input-text" onChange={getPassword} type={ShowPassword ? "text" : "password"} placeholder='Password'/>
-                        <button className = "show-pass-button" onClick={() => toggleShowPassword()}>{ShowPassword ? "Hide Password" : "Show Password"}</button>
-                        <div className="signup-error-message">{ShowError ? {Error} : ""}</div>
+                        <div className="signup-error-message">{ShowError ? Error.toString() : ""}</div>
                     </div>
+                    <div className="show-pass-button-div"><button className = "show-pass-button" onClick={() => toggleShowPassword()}>{ShowPassword ? "Hide Password" : "Show Password"}</button></div>
                     <div className="signup-button-div"><Button className="signup-button" text="Signup" onClick={() => OnSignup()}></Button></div>
                 </div>
             </div>

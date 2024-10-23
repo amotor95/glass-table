@@ -44,6 +44,8 @@ export function LoggedInSidebar() {
     return(
         <div className="login-sidebar">
             <div className="welcome-div">Welcome {User.username}!</div>
+            <Button className= "sidebar-button" onClick={()=>setCurrentScreen("Watchlist")} text="Watchlist"></Button>
+            <Button className= "sidebar-button" onClick={()=>setCurrentScreen("PaperTrading")} text="Paper Trading"></Button>
             <Button className= "sidebar-button" onClick={()=>LogOut()} text="Logout"></Button>
         </div>
     );

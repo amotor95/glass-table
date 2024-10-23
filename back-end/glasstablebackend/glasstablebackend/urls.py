@@ -37,11 +37,15 @@ urlpatterns = [
     path('remove_stock_from_watchlist', watchlist_views.remove_stock_from_watchlist),
     path('get_home_watchlist', watchlist_views.get_home_watchlist),
 
-    path('get_stock', stock_views.get_stock),
-    path('make_stock', stock_views.make_stock),
-    path('delete_stock', stock_views.delete_stock),
-    path('update_stock', stock_views.update_stock),
     path('get_all_stocks', stock_views.get_all_stocks),
+    path('get_cash', stock_views.get_cash),
+    path('get_account_value', stock_views.get_account_value),
+    path('buy_stock', stock_views.buy_stock),
+    path('sell_stock', stock_views.sell_stock),
+    path('get_stock_info', stock_views.get_stock_info),
 
-    path('get_default_watchlist', user_profile_views.get_default_watchlist),
+    path('get_leaderboard', user_profile_views.get_leaderboard),
+    path('toggle_join_leaderboard', user_profile_views.toggle_join_leaderboard),
+    path('get_join_leaderboard', user_profile_views.get_join_leaderboard),
+
 ]

@@ -18,7 +18,31 @@ from watchlist.models import Watchlist
 @api_view(['GET'])
 # @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def get_default_watchlist(request):
-    userprofile = get_object_or_404(UserProfile,owner=request.user)
-    serializer = UserProfileSerializer(userprofile)
-    return Response(serializer.data)
+def get_leaderboard(request):
+    users = UserProfile.objects.filter(leaderboard=True)
+    users = users.order_by('-account_value')
+    leaderboard = []
+    for person in users:
+        account_name = person.user.username
+        account_value = person.account_value
+        leaderboard.append({'account_name' : account_name, 'account_value' : account_value})
+    print(leaderboard)
+    return Response(leaderboard)
+
+@api_view(['POST'])
+# @authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def toggle_join_leaderboard(request):
+    userprofile = get_object_or_404(UserProfile,user=request.user)
+    userprofile.leaderboard = not userprofile.leaderboard
+    userprofile.save()
+    print(userprofile.leaderboard)
+    return Response(userprofile.leaderboard)
+
+@api_view(['GET'])
+# @authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_join_leaderboard(request):
+    userprofile = get_object_or_404(UserProfile, user=request.user)
+    print(userprofile.leaderboard)
+    return Response(userprofile.leaderboard)

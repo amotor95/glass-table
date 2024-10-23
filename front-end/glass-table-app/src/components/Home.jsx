@@ -5,14 +5,14 @@ import axios from 'axios'
 import { useState } from 'react'
 
 export function Home() {
-    const [Stocks, setHomeStocks] = useState()
+    const [Stocks, setHomeStocks] = useState([])
     
     function getHomeStocks() {
         axios.get('http://localhost:8000/get_home_watchlist')
         .then(response => {
             console.log("Home Watchlist sucessfully retrieved!");
-            console.log(response.data);
-            setHomeStocks(response.data)
+            console.log(Object.values(response.data));
+            setHomeStocks(Object.values(response.data)); // Convert the object to an array
         }).catch(error => {
             console.log(error + ", failed to get watchlists!");
         });
@@ -38,7 +38,7 @@ export function Home() {
                     <Card className="item"></Card> */}
                     { Array.isArray(Stocks) ? (
                         Stocks.map((stock, index) => (
-                            <HomeCard className="home-card" cardName={stock.company} cardPrice={stock.price}></HomeCard>
+                            <HomeCard className="home-card" cardTicker={stock.ticker} cardName={stock.company_name} cardPrice={stock.current_price}></HomeCard>
                         ))
                         ) :
                             <div>Cards didn't load!</div> 
@@ -56,7 +56,7 @@ export function Home() {
                     <Card className="item"></Card> */}
                     { Array.isArray(Stocks) ? (
                         Stocks.map((stock, index) => (
-                            <HomeCard className="home-card" cardName={stock.company} cardPrice={stock.price}></HomeCard>
+                            <HomeCard className="home-card" cardTicker={stock.ticker} cardName={stock.company_name} cardPrice={stock.current_price}></HomeCard>
                         ))
                         ) :
                             <div>Cards didn't load!</div> 
@@ -76,7 +76,7 @@ export function Home() {
                     <Card className="item"></Card> */}
                     { Array.isArray(Stocks) ? (
                         Stocks.map((stock, index) => (
-                            <HomeCard cardName={stock.company} cardPrice={stock.price}></HomeCard>
+                            <HomeCard cardTicker={stock.ticker} cardName={stock.company_name} cardPrice={stock.current_price}></HomeCard>
                         ))
                         ) :
                             <div>Cards didn't load!</div> 
@@ -94,7 +94,7 @@ export function Home() {
                     <Card className="item"></Card> */}
                     { Array.isArray(Stocks) ? (
                         Stocks.map((stock, index) => (
-                            <HomeCard cardName={stock.company} cardPrice={stock.price}></HomeCard>
+                            <HomeCard cardTicker={stock.ticker} cardName={stock.company_name} cardPrice={stock.current_price}></HomeCard>
                         ))
                         ) :
                             <div>Cards didn't load!</div> 

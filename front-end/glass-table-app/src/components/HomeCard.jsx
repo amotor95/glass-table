@@ -1,15 +1,20 @@
 import React from 'react';
 import './HomeCard.css';
 
+// Create a number formatter for USD
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
-
-function HomeCard({imgSrc, cardName, cardPrice}) {
+function HomeCard({imgSrc, cardName, cardTicker, cardPrice}) {
 
     return(
         <div className='home-card-container'>
             <img className="home-card-img" src = {imgSrc} alt = "placeholder img"></img>
+            <h1 className="home-card-ticker">{cardTicker}</h1>
             <h2 className="home-card-title">{cardName}</h2>
-            <p className="home-ard-description">Price: {cardPrice}</p>
+            <p className="home-card-description">Price: {formatter.format(cardPrice)}</p>
         </div>
     );
 }

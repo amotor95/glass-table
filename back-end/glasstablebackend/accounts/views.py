@@ -11,6 +11,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.contrib.auth.password_validation import validate_password
 
+from watchlist.models import Watchlist
+from user_profile.models import UserProfile
+
 from .serializers import UserSerializer
 
 @api_view(['POST'])
@@ -18,18 +21,29 @@ def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         try:
-            validate_email(request.data.email)
+            validate_email(request.data["email"])
         except ValidationError:
+            print("Bad email")
             return Response({'error': 'Invalid email address'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            validate_password(request.data.password)
+            validate_password(request.data["password"])
         except ValidationError as e:
+            print("Bad password")
             return Response({'error': list(e.messages)}, status=status.HTTP_400_BAD_REQUEST)
-        serializer.save()
-        user = User.objects.get(username=request.data['username'], email=request.data['email'], first_name=request.data['first_name'], last_name=request.data['last_name'])
+        if User.objects.filter(username=request.data['username']).exists():
+            print("Username exists")
+            return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+        user = serializer.save()
         user.set_password(request.data['password'])
         user.save()
         token = Token.objects.create(user=user)
+        print("User created")
+        default_watchlist = Watchlist.objects.create(name="Default", owner=user)
+        default_watchlist.stocks = "AAPL,MSFT,GOOGL,AMZN,TSLA"
+        default_watchlist.save()
+        user_profile = UserProfile.objects.create(owner=user)
+        user_profile.balance = 50000
+        user_profile.save()
         return Response({'token': token.key, 'user': serializer.data})
     return Response(serializer.errors, status=status.HTTP_200_OK)
 
