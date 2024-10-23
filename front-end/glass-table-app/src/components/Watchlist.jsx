@@ -26,7 +26,7 @@ function Watchlist() {
     }, [CurrentWatchlist])
 
     function getWatchlists() {
-        axios.get('glass-table-production.up.railway.app/get_watchlists', {
+        axios.get('https://glass-table-production.up.railway.app/get_watchlists', {
             headers: {
                 Authorization: 'Token ' + User.token,
             },
@@ -42,7 +42,7 @@ function Watchlist() {
     }
 
     function getWatchlistStocks() {
-        axios.get('glass-table-production.up.railway.app/fetch_watchlist_stocks', {
+        axios.get('https://glass-table-production.up.railway.app/fetch_watchlist_stocks', {
             headers: {
                 Authorization: 'Token ' + User.token,
             },
@@ -67,7 +67,7 @@ function Watchlist() {
     }
 
     function deleteWatchlist() {
-        axios.post('glass-table-production.up.railway.app/delete_watchlist',    
+        axios.post('https://glass-table-production.up.railway.app/delete_watchlist',    
         {
             name: CurrentWatchlist,
         },
@@ -87,7 +87,7 @@ function Watchlist() {
 
     function add_stock() {
         var stock_to_add = document.getElementById('stocks-myInput').value.toUpperCase();
-        axios.post('glass-table-production.up.railway.app/add_stock_to_watchlist',         
+        axios.post('https://glass-table-production.up.railway.app/add_stock_to_watchlist',         
         {
             stock_name: stock_to_add,
             watchlist_name: CurrentWatchlist,
@@ -106,7 +106,7 @@ function Watchlist() {
     }
 
     function remove_stock(stock_to_remove) {
-        axios.post('glass-table-production.up.railway.app/remove_stock_from_watchlist',    
+        axios.post('https://glass-table-production.up.railway.app/remove_stock_from_watchlist',    
         {
             stock_name: stock_to_remove,
             watchlist_name: CurrentWatchlist,
@@ -128,7 +128,7 @@ function Watchlist() {
         const input = document.getElementById("watchlist-myInput");
         const create_name = input.value;
 
-        axios.post('glass-table-production.up.railway.app/make_watchlist',
+        axios.post('https://glass-table-production.up.railway.app/make_watchlist',
             {
                 name: create_name,
             },

@@ -23,7 +23,7 @@ export function Login() {
 
     function TestToken() {
     
-        axios.get('glass-table-production.up.railway.app/test_token', {
+        axios.get('https://glass-table-production.up.railway.app/test_token', {
             headers: {
                 Authorization: 'Token ' + User.token
             }
@@ -40,7 +40,7 @@ export function Login() {
 
     function OnLogin() {
         
-        axios.post('glass-table-production.up.railway.app/login',
+        axios.post('https://glass-table-production.up.railway.app/login',
             {
                 username: username,
                 password: password

@@ -8,7 +8,7 @@ export function Home() {
     const [Stocks, setHomeStocks] = useState([])
     
     function getHomeStocks() {
-        axios.get('glass-table-production.up.railway.app/get_home_watchlist')
+        axios.get('https://glass-table-production.up.railway.app/get_home_watchlist')
         .then(response => {
             console.log("Home Watchlist sucessfully retrieved!");
             console.log(Object.values(response.data));

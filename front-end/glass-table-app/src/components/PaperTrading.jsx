@@ -40,7 +40,7 @@ export function PaperTrading() {
     }, [Stocks])
 
     function getStocks() {
-        axios.get('glass-table-production.up.railway.app/get_all_stocks',
+        axios.get('https://glass-table-production.up.railway.app/get_all_stocks',
         {
             headers: {
                 Authorization: 'Token ' + User.token,
@@ -56,7 +56,7 @@ export function PaperTrading() {
     }
 
     function buyStock() {
-        axios.post('glass-table-production.up.railway.app/buy_stock',
+        axios.post('https://glass-table-production.up.railway.app/buy_stock',
         {
             ticker: CurrentStock,
             price: CurrentStockPrice,
@@ -76,7 +76,7 @@ export function PaperTrading() {
     }
 
     function sellStock() {
-        axios.post('glass-table-production.up.railway.app/sell_stock',
+        axios.post('https://glass-table-production.up.railway.app/sell_stock',
         {
             ticker: CurrentStock,
             price: CurrentStockPrice,
@@ -96,7 +96,7 @@ export function PaperTrading() {
     }
 
     function getCash() {
-        axios.get('glass-table-production.up.railway.app/get_cash', 
+        axios.get('https://glass-table-production.up.railway.app/get_cash', 
         {
             headers: {
                 Authorization: 'Token ' + User.token,
@@ -113,7 +113,7 @@ export function PaperTrading() {
     }
 
     function get_account_value() {
-        axios.get('glass-table-production.up.railway.app/get_account_value', 
+        axios.get('https://glass-table-production.up.railway.app/get_account_value', 
         {
             headers: {
                 Authorization: 'Token ' + User.token,
@@ -131,7 +131,7 @@ export function PaperTrading() {
 
     async function getStockInfo(ticker) {
         try {
-            const response = await axios.get('glass-table-production.up.railway.app/get_stock_info', 
+            const response = await axios.get('https://glass-table-production.up.railway.app/get_stock_info', 
             {
                 headers: {
                     Authorization: 'Token ' + User.token,
@@ -164,7 +164,7 @@ export function PaperTrading() {
     }
 
     function getLeaderboard() {
-        axios.get('glass-table-production.up.railway.app/get_leaderboard', 
+        axios.get('https://glass-table-production.up.railway.app/get_leaderboard', 
         {
             headers: {
                 Authorization: 'Token ' + User.token,
@@ -207,7 +207,7 @@ export function PaperTrading() {
     }
 
     function getJoinLeaderboard() {
-        axios.get('glass-table-production.up.railway.app/get_join_leaderboard', 
+        axios.get('https://glass-table-production.up.railway.app/get_join_leaderboard', 
         {
             headers: {
                 Authorization: 'Token ' + User.token,
@@ -225,7 +225,7 @@ export function PaperTrading() {
     }
 
     function toggleJoinLeaderboard() {
-        axios.post('glass-table-production.up.railway.app/toggle_join_leaderboard', {},
+        axios.post('https://glass-table-production.up.railway.app/toggle_join_leaderboard', {},
             {
                 headers: {
                     Authorization: 'Token ' + User.token,
