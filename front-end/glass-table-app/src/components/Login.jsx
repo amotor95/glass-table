@@ -39,7 +39,7 @@ export function Login() {
     };
 
     function OnLogin() {
-        
+        // http://localhost:8000/login
         axios.post('https://glass-table-production.up.railway.app/login',
             {
                 username: username,

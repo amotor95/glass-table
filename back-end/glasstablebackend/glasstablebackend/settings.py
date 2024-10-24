@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DATABASE_URL = 'postgresql://postgres:FRJLLXeZYsYIaGQKoykUGXZYxnoyIFuM@junction.proxy.rlwy.net:31522/railway'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -27,6 +29,13 @@ SECRET_KEY = 'django-insecure-=*6o(8o$v@8%p!+0w4%y1v8ce75(pw$)-en6h#dw6ttgf(5$u&
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://glass-table-production.up.railway.app/',
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -103,23 +112,30 @@ WSGI_APPLICATION = 'glasstablebackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#for local postgresql database
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'glass-table',
-#         'USER': 'admin_user',
+#         'NAME': 'glasstable',
+#         'USER': 'admin',
 #         'PASSWORD': 'glasstableauth101',
 #         'HOST': '127.0.0.1',
 #         'PORT': '5432',
 #     }
 # }
 
+#for production railway postgresql database
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
+
+#for sqlite database
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation

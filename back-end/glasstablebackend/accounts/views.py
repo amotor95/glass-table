@@ -10,6 +10,7 @@ from rest_framework.authtoken.models import Token
 from django.core.exceptions import ValidationError
 # from django.core.validators import validate_email
 from django.contrib.auth.password_validation import validate_password
+from better_profanity import profanity
 
 from watchlist.models import Watchlist
 from user_profile.models import UserProfile
@@ -19,6 +20,10 @@ from .serializers import UserSerializer
 @api_view(['POST'])
 def signup(request):
     serializer = UserSerializer(data=request.data)
+    if request.data["username"] == "":
+        return Response({'error': ['Username cannot be empty!']}, status=status.HTTP_400_BAD_REQUEST)
+    if profanity.contains_profanity(request.data["username"]):
+        return Response({'error': ['Username contains profanity!']}, status=status.HTTP_400_BAD_REQUEST)
     print("Signup started!")
     if serializer.is_valid():
         # try:
@@ -33,7 +38,7 @@ def signup(request):
             return Response({'error': list(e.messages)}, status=status.HTTP_400_BAD_REQUEST)
         if User.objects.filter(username=request.data['username']).exists():
             print("Username exists")
-            return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': ['Username already exists']}, status=status.HTTP_400_BAD_REQUEST)
         user = serializer.save()
         user.set_password(request.data['password'])
         user.save()

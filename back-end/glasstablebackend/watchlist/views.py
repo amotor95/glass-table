@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from better_profanity import profanity
 
 from .models import *
 from stock.models import Stock
@@ -22,7 +23,7 @@ import yfinance as yf
 # @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_watchlists(request):
-    watchlists = Watchlist.objects.filter(owner=request.user).exclude(name="XJANSJDNAJSNDJANSDJAN")
+    watchlists = Watchlist.objects.filter(owner=request.user)
     watchlists.order_by("name")
     serializer = WatchlistSerializer(watchlists, many = True)
     return Response(serializer.data)
@@ -31,10 +32,10 @@ def get_watchlists(request):
 #@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def make_watchlist(request):
-    if(request.data["name"] == "XJANSJDNAJSNDJANSDJAN"):
-        return Response("Watchlist name is reserved!", status=status.HTTP_400_BAD_REQUEST)
-    elif(request.data["name"] == ""):
+    if(request.data["name"] == ""):
         return Response("Watchlist name cannot be empty!", status=status.HTTP_400_BAD_REQUEST)
+    if profanity.contains_profanity(request.data["name"]):
+        return Response("Watchlist name contains profanity!", status=status.HTTP_400_BAD_REQUEST)
     watchlist, created = Watchlist.objects.get_or_create(name=request.data["name"], owner=request.user)
     serializer = WatchlistSerializer(watchlist)
     if created:
@@ -46,9 +47,7 @@ def make_watchlist(request):
 #@authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_watchlist(request):
-    if request.data["name"] == "XJANSJDNAJSNDJANSDJAN":
-        return Response("Cannot delete protected watchlist!", status=status.HTTP_400_BAD_REQUEST)
-    elif request.data["name"] == "Default":
+    if request.data["name"] == "Default":
         return Response("Cannot delete your default watchlist!", status=status.HTTP_400_BAD_REQUEST)
     try:
         watchlist = Watchlist.objects.get(name=request.data["name"], owner=request.user)
@@ -120,8 +119,7 @@ def fetch_watchlist_stocks(request):
 
 @api_view(['GET'])
 def get_home_watchlist(request):
-    watchlist = get_object_or_404(Watchlist,name="XJANSJDNAJSNDJANSDJAN")
-    stocks = watchlist.get_tickers_list()
+    stocks = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
     ticker_data = {}
     for stock in stocks:
         try:
