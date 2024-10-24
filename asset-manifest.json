@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/glass-table/static/css/main.31312ef6.css",
-    "main.js": "/glass-table/static/js/main.249ffb0f.js",
+    "main.css": "/glass-table/static/css/main.10f0da43.css",
+    "main.js": "/glass-table/static/js/main.78fd849d.js",
     "static/js/453.9cd11d2a.chunk.js": "/glass-table/static/js/453.9cd11d2a.chunk.js",
     "static/media/glass-table-stock-market-image.jpg": "/glass-table/static/media/glass-table-stock-market-image.ad57505e23386349792d.jpg",
     "index.html": "/glass-table/index.html",
-    "main.31312ef6.css.map": "/glass-table/static/css/main.31312ef6.css.map",
-    "main.249ffb0f.js.map": "/glass-table/static/js/main.249ffb0f.js.map",
+    "main.10f0da43.css.map": "/glass-table/static/css/main.10f0da43.css.map",
+    "main.78fd849d.js.map": "/glass-table/static/js/main.78fd849d.js.map",
     "453.9cd11d2a.chunk.js.map": "/glass-table/static/js/453.9cd11d2a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.31312ef6.css",
-    "static/js/main.249ffb0f.js"
+    "static/css/main.10f0da43.css",
+    "static/js/main.78fd849d.js"
   ]
 }
